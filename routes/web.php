@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/todos', 'TodoController@index');
+Route::get('/tags', 'TagController@index');
+Route::get('/merges', 'MergeController@index');
