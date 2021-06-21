@@ -10,13 +10,13 @@ class CreateMergesTable extends Migration
    public function up()
     {
         Schema::create('merges', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->increments('id')->unique();
             
-            $table->integer('TodoID')->unsigned();
-            $table->foreign('TodoID')->references('id')->on('todos');
+            $table->integer('todo_id')->unsigned();
+            $table->foreign('todo_id')->references('id')->on('todos');
             
-            $table->integer('TagID')->unsigned();
-            $table->foreign('TagID')->references('id')->on('tags');
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('tag_id')->references('id')->on('tags');
             
             $table->softDeletes();
         });
