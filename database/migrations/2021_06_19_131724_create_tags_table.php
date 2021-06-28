@@ -6,18 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTagsTable extends Migration
 {
-    
-    public function up()
-    {
+  
+    public function up(){
         Schema::create('tags', function (Blueprint $table) {
-            $table->bincrements('id')->unique();
+            $table->bigIncrements('id')->unique();
             $table->string('tagname');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
-    
-    public function down()
-    {
+    public function down(){
         Schema::dropIfExists('tags');
     }
 }
