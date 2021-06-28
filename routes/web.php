@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/todos', 'TodoController@index');
-Route::get('/tags', 'TagController@index');
-Route::get('/merges', 'MergeController@index');
+Route::get('/', 'TodoController@index');

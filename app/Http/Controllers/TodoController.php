@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Todo;
 use App\Tag;
+use App\Todo;
 
-class TodoController extends Controller
-{
+class TodoController extends Controller{
+    
     public function index(){
-        Todo::find(1)->tags;
-        $test = Todo::find(1)->tags->tag;
-        dd($test);
+        $todos = Todo::all();
+        return view('index')->with(['todos' => $todos]);  
     }
 }
