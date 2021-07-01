@@ -12,10 +12,11 @@
         <h1>Todo List</h1>
         @foreach ($todos as $todo)
                 <p>title: {{$todo->title}}</p>
-                <p>body: {{$todo->title}}</p>
+                <p>body: {{$todo->body}}</p>
+                <p>dead_line: {{$todo->deadline}}</p>
                 <p>tag:
                     @foreach($todo->tags as $tag)
-                        {{$todo->tagname}}
+                        {{$tag->tagname}}
                     @endforeach
                 </p>
         @endforeach
