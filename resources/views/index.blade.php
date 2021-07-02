@@ -10,15 +10,16 @@
     </head>
     <body>
         <h1>Todo List</h1>
+        <h3><a href='/todos/create'>create</a></h3>
         @foreach ($todos as $todo)
-                <p>title: {{$todo->title}}</p>
-                <p>body: {{$todo->body}}</p>
-                <p>dead_line: {{$todo->deadline}}</p>
+                <h3><a href="/todos/{{$todo->id}}">{{$todo->title}}</a></h3>
                 <p>tag:
                     @foreach($todo->tags as $tag)
                         {{$tag->tagname}}
                     @endforeach
                 </p>
+                <p>body: {{$todo->body}}</p>
+                <p>dead_line: {{$todo->deadline}}</p>
         @endforeach
     </body>
 </html>
