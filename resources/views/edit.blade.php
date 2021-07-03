@@ -2,28 +2,42 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <title>Todo</title>
     </head>
     
     <body>
-        <h1 class="title">編集ページ</h1>
+        <h1 class="title">Edit Paged</h1>
         
         <div class="content">
             
-            <form action="/posts/{{ $post->id }}" method="POST">
+            <form action="/todos/{{ $todo->id }}" method="TODO">
                 @csrf
                 @method('PUT')
                 
                 <div class="content_title">
                     <h2>Title</h2>
-                    <input type="text" name="post[title]" placeholder="タイトル" value="{{ $post->title }}"/>
-                    <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+                    <input type="text" name="todo[title]" placeholder="task" value="{{ $todo->title }}"/>
+                    <p class="title__error" style="color:red">{{ $errors->first('todo.title') }}</p>
+                </div>
+                
+                <div class="content_tag">
+                    <h2>Tag</h2>
+                    @foreach($todo->tags as $tag)
+                        <input type="text" name="tag[tagname]" placeholder="tag" value="{{ $tag->tagname }}"/>
+                        <p class="tag__error" style="color:red">{{ $errors->first('tag.tagname') }}</p>
+                    @endforeach
                 </div>
                 
                 <div class="content_body">
-                    <h2>Body</h2>
-                    <input type="text" name="post[body]" placeholder="本日の内容" value="{{ $post->body }}"/>
-                    <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                    <h2>Details</h2>
+                    <input type="text" name="todo[body]" placeholder="memo" value="{{ $todo->body }}"/>
+                    <p class="body__error" style="color:red">{{ $errors->first('todo.body') }}</p>
+                </div>
+                
+                <div class="content_deadline">
+                    <h2>Deadline</h2>
+                    <input type="text" name="todo[deadline]" placeholder="211231" value="{{ $todo->deadline }}"/>
+                    <p class="deadline__error" style="color:red">{{ $errors->first('todo.deadline') }}</p>
                 </div>
                 
                 <input type="submit" value="serve"/>
