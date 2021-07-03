@@ -9,4 +9,5 @@ class Todo extends Model
     public function tags() {
         return $this->belongsToMany("App\Tag", "merges", "todo_id", "tag_id");
     }
+    protected $fillable = ['title', 'body', 'deadline'];
 }
