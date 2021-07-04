@@ -7,7 +7,7 @@
     
     <body>
         <h1>Todo</h1>
-        <form action="/todos" method="TODO">
+        <form action="/todos" method="POST">    <!--method調べる-->
             @csrf
             
             <div class="title">
