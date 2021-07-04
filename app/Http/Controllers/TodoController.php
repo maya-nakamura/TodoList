@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Requests\TodoRequest;
+use App\Http\Requests\TodoRequest;
 use App\Tag;
 use App\Todo;
 use App\Merge;
+use DB;
 
 class TodoController extends Controller
 {
@@ -19,9 +20,11 @@ class TodoController extends Controller
     public function create(){
         return view('create');
     }
-    public function store(Todo $todo, TodoRequest $request){    //保存
+    public function store(Todo $todo, Tag $tag, Merge $merge, TodoRequest $request){    //一度で複数のテーブルに保存
         $input = $request['todo'];
         $todo->fill($input)->save();
+        $tag->fill($iput)->save();
+        $merge->fill($input)->save();
         return redirect('/todos/' . $todo->id);
     }
     public function edit(Todo $todo){   //編集ページ
