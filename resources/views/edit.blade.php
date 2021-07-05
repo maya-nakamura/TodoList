@@ -10,7 +10,7 @@
         
         <div class="content">
             
-            <form action="/todos/{{ $todo->id }}" method="TODO">
+            <form action="/todos/{{ $todo->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 
