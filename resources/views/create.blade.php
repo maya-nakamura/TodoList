@@ -1,13 +1,17 @@
 <!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    
     <head>
         <meta charset="utf-8">
         <title>Todo</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     </head>
     
     <body>
         <h1>Todo</h1>
-        <form action="/todos" method="POST">    <!--method調べる-->
+        <form action="/todos" method="POST"> 
             @csrf
             
             <div class="title">
@@ -27,8 +31,11 @@
             </div>
             <div class="deadline">
                 <h2>Deadline</h2>
-                <input type="text" name="todo[deadline]" placeholder="211231">{{ old('todo.deadline') }}</textarea>
-                <p class="deadline__error" style="color:red">{{ $errors->first('todo.deadline') }}</p>
+                <input class="flatpickr" type="text" placeholder="Select Date.." name="todo[deadline]">{{ old('todo.deadline') }}</input>
+                <script>
+                    flatpickr('.flatpickr');
+                </script>
+                <p class= "deadline__error" style="color:red">{{ $errors->first('todo.deadline') }}</p>
             </div>
             
             <input type="submit" value="serve"/>

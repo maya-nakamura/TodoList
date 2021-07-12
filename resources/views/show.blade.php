@@ -11,7 +11,7 @@
         <h1>Todo</h1>
         <p class='edit'>[<a href="/todos/{{ $todo->id }}/edit">edit</a>]</p>
         
-        <form action="/todos/{{ $todo->id }}" id="from_delete" method="todo">
+        <form action="/todos/{{ $todo->id }}" id="from_delete" method="POST">
             @csrf
             @method('DELETE')
             <input type="submit" style="display:none"/>

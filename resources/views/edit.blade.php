@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <title>Todo</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     </head>
     
     <body>
@@ -36,8 +39,11 @@
                 
                 <div class="content_deadline">
                     <h2>Deadline</h2>
-                    <input type="text" name="todo[deadline]" placeholder="211231" value="{{ $todo->deadline }}"/>
+                    <input class="flatpickr" type="text" name="todo[deadline]" placeholder="Select Date.." value="{{ $todo->deadline }}"/>
                     <p class="deadline__error" style="color:red">{{ $errors->first('todo.deadline') }}</p>
+                    <script>
+                        flatpickr('.flatpickr');
+                    </script>
                 </div>
                 
                 <input type="submit" value="serve"/>
