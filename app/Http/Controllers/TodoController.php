@@ -33,38 +33,47 @@ class TodoController extends Controller
         $merge->todo_id = $todo->id;
         $merge->tag_id = $tag->id;
         $merge->save();
-        
+    
         return redirect('/todos/' . $todo->id);
     }
     public function edit(Todo $todo){   //編集ページ
         return view('edit')->with(['todo' => $todo]);
     }
-    public function update(TodoRequest $request){   //編集ページ
-        $todo = Sample::find($request->id);   //モデルのTodo //インスタンス
+    public function update(TodoRequest $request, Todo $todo, Tag $tag){   //編集ページ
+        
         $input_2 = $request['todo'];
         $todo->fill($input_2)->save();
         
-        $tag = Sample::find($request->id);
         $input_tag_2 = $request['tag'];
         $tag->fill($input_tag_2)->save();
+        
+        //①mergesテーブルのデータを全件取得し、$mergesと置く
+        //②その中から、todo_id=$todo->idであるものを取得し、$itemと置く
+        //③$itemのtag_idを、$tag_idに置き換える
+        //④保存する
+        
+        //$merge = Merge::all();
+        //$item = $merge->where('todo_id', $todo->id);
+        $item = Merge::query()->where('todo_id',  '=', $todo->id)->first();
+        $item->tag_id = $tag->id;
+        $item->save();
 
-        $merge = Sample::find($request->id);
-        $merge->todo_id = $todo->id;
-        $merge->tag_id = $tag->id;
-        $merge->save();
+        //$merge->todo_id = $todo->id;
+        //$merge->tag_id = $tag->id;
+        //$merge->save();
+        //dd($item);
         
         return redirect('/todos/' .$todo->id);
     }
-    public function destroy(){
-        $todo = new Todo;
-        $todo->destroy(1);
+    public function destroy(Todo $todo){
         
-        $tag = new Tag;
-        $tag->destroy(1);
         
-        $merge = new Merge;
-        $merge->todo_id = delete();
-        $merge->tag_id = delete();
+        //$tag->delete();
+        
+        //$merge = new Merge;
+        $item = Merge::where('todo_id', $todo->id)->delete();
+        
+        $todo->delete();    //モデルで消去
         
         return redirect('/');
     }
