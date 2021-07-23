@@ -10,10 +10,25 @@ use DB;
 
 class TodoController extends Controller
 {
-    public function index(){
+    public function index(){   
         $todos = Todo::all();
-        return view('index')->with(['todos' => $todos]);  
+        //dd($todos);
+        
+        if ($search = request('search')) {
+            $keyword = Tag::query()->where('tagname',  '=', $search)->first();
+            
+            if(!empty($keyword)){
+                $test = optional($keyword);
+                //dd($test);
+                return view('index')->with(['todos' => $test] );
+            }
+            else{
+                return view('index')->with(['todos' => $todos]);
+            }
+        }
+        return view('index')->with(['todos' => $todos]);
     }
+    
     public function show(Todo $todo){
         return view('show')->with(['todo' => $todo]);
     }
@@ -52,25 +67,14 @@ class TodoController extends Controller
         //③$itemのtag_idを、$tag_idに置き換える
         //④保存する
         
-        //$merge = Merge::all();
-        //$item = $merge->where('todo_id', $todo->id);
         $item = Merge::query()->where('todo_id',  '=', $todo->id)->first();
         $item->tag_id = $tag->id;
         $item->save();
-
-        //$merge->todo_id = $todo->id;
-        //$merge->tag_id = $tag->id;
-        //$merge->save();
-        //dd($item);
         
         return redirect('/todos/' .$todo->id);
     }
     public function destroy(Todo $todo){
         
-        
-        //$tag->delete();
-        
-        //$merge = new Merge;
         $item = Merge::where('todo_id', $todo->id)->delete();
         
         $todo->delete();    //モデルで消去
