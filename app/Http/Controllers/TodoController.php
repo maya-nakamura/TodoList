@@ -11,20 +11,28 @@ use DB;
 class TodoController extends Controller
 {
     public function index(){   
-        $todos = Todo::all();
-        //dd($todos);
+        //$todos = Todo::all();
+        $search = request('search');
         
-        if ($search = request('search')) {
-            $keyword = Tag::query()->where('tagname',  '=', $search)->first();
+        if (!empty($search)){
+            $keyword = Tag::query()->where('tagname',  '=', $search)->get('id')->toArray();
+            dd($keyword);
             
             if(!empty($keyword)){
-                $test = optional($keyword);
-                //dd($test);
-                return view('index')->with(['todos' => $test] );
+                $merges = Merge::all();
+                //dd($merges);
+                $filterd = $merges->whereIn('tag_id', $keyword)->all();
+                //$todos = optional($keyword);
+                dd($filterd);
+                //return view('index')->with(['todos' => $test] );
             }
             else{
-                return view('index')->with(['todos' => $todos]);
+                echo "一致する結果はありませんでした";
+                $todos = Todo::all();
             }
+        }
+        else{
+            $todos = Todo::all();
         }
         return view('index')->with(['todos' => $todos]);
     }
