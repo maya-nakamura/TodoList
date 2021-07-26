@@ -16,15 +16,13 @@ class TodoController extends Controller
         
         if (!empty($search)){
             $keyword = Tag::query()->where('tagname',  '=', $search)->get('id')->toArray();
-            dd($keyword);
+            //dd($keyword);
             
             if(!empty($keyword)){
-                $merges = Merge::all();
+                //$merges = Merge::all();
                 //dd($merges);
-                $filterd = $merges->whereIn('tag_id', $keyword)->all();
-                //$todos = optional($keyword);
-                dd($filterd);
-                //return view('index')->with(['todos' => $test] );
+                $filterd = Merge::query()->whereIn('tag_id', $keyword)->get('todo_id')->toArray();
+                $todos = Todo::query()->whereIn('id', $filterd)->get();
             }
             else{
                 echo "一致する結果はありませんでした";
