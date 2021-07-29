@@ -24,7 +24,7 @@ class TodoController extends Controller
                 $todos = Todo::query()->whereIn('id', $filterd)->get();
             }
             else{
-                echo "一致する結果はありませんでした";
+                echo "一致する結果はありませんでした";  //位置を注意
                 $todos = Todo::all();
             }
         }
