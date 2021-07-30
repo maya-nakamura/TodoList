@@ -30,7 +30,7 @@
                         {{$tag->tagname}}
                     @endforeach
                 </p>
-                <p style="text-align:center">body: {{$todo->body}}</p>
+                <!--<p style="text-align:center">body: {{$todo->body}}</p>-->
                 <p style="text-align:center">dead_line: {{$todo->deadline}}</p>
                 <br/> 
         @endforeach
