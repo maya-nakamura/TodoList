@@ -30,9 +30,23 @@
                         {{$tag->tagname}}
                     @endforeach
                 </p>
-                <p style="text-align:center">body: {{$todo->body}}</p>
+                <!--<p style="text-align:center">body: {{$todo->body}}</p>-->
                 <p style="text-align:center">dead_line: {{$todo->deadline}}</p>
                 <br/> 
+                <form action="/todos/{{ $todo->id }}" id="from_delete" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" style="display:none"/>
+                    <p style="text-align:center" class='delete'>[<span onclick="deleteTodo(this)">delete</span>]</p> 
+                </form>
+                <script>
+                    function deleteTodo(e){
+                        'use strict';
+                        if(confirm('削除すると復元できません。\n本当に削除しますか？')){
+                            document.getElementById('from_delete').submit();
+                        }   
+                    }
+        </script>
         @endforeach
     </body>
 </html>

@@ -10,8 +10,7 @@ use DB;
 
 class TodoController extends Controller
 {
-    public function index(){   
-        //$todos = Todo::all();
+    public function index(){   //検索と一覧表示の機能を持たせる
         $search = request('search');
         
         if (!empty($search)){
@@ -25,7 +24,7 @@ class TodoController extends Controller
                 $todos = Todo::query()->whereIn('id', $filterd)->get();
             }
             else{
-                echo "一致する結果はありませんでした";
+                echo "一致する結果はありませんでした";  //位置を注意
                 $todos = Todo::all();
             }
         }
