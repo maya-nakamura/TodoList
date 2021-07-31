@@ -7,30 +7,32 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+    <br/>
     
-    <body>
-        <h1 style="text-align:center">Todo</h1>
-        <p style="text-align:center" class='edit'>[<a href="/todos/{{ $todo->id }}/edit">edit</a>]</p>
+    <body style="text-align:center">
+        <h1>Todo</h1>
+        <p class='edit'>[<a href="/todos/{{ $todo->id }}/edit">edit</a>]</p>
         
         <form action="/todos/{{ $todo->id }}" id="from_delete" method="POST">
             @csrf
             @method('DELETE')
             <input type="submit" style="display:none"/>
-            <p style="text-align:center" class='delete'>[<span onclick="deleteTodo(this)">delete</span>]</p> 
+            <p class='delete'>[<span onclick="deleteTodo(this)">delete</span>]</p> 
         </form>
+        <br/>
         
         <div class='contents'>
-            <h2 style="text-align:center">{{ $todo->title }}</h2>
-            <p style="text-align:center">
+            <h2>{{ $todo->title }}</h2>
+            <p>
                 @foreach($todo->tags as $tag)
                     {{$tag->tagname}}
                 @endforeach
             </p>
-            <p style="text-align:center">{{ $todo->body }}</p>
-            <p style="text-align:center">{{ $todo->deadline }}</p>
+            <p>{{ $todo->body }}</p>
+            <p>{{ $todo->deadline }}</p>
         </div>
         
-        <div style="text-align:center" class='back' style="text-align:center">[<a href='/'>back</a>]</div>
+        <div class='back'>[<a href='/'>back</a>]</div>
         
         <script>
         function deleteTodo(e){

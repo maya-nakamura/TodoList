@@ -10,21 +10,23 @@
     </head>
     
     <body>
+        <br/>
         <h1 class="title" style="text-align:center">Edit Paged</h1>
+        <br/>
         
-        <div class="content">
+        <div class="content" style="text-align:center">
             
             <form action="/todos/{{ $todo->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 
                 <div class="content_title">
-                    <h2 style="text-align:center">Title</h2>
+                    <h2>Title</h2>
                     <input type="text" name="todo[title]" placeholder="task" value="{{ $todo->title }}"/>
-                    <p style="text-align:center" class="title__error" style="color:red">{{ $errors->first('todo.title') }}</p>
+                    <p class="title__error" style="color:red">{{ $errors->first('todo.title') }}</p>
                 </div>
                 
-                <div class="content_tag">
+                <div class="content_tag" style="text-align: center;">
                     <h2 style="text-align:center">Tag</h2>
                     @foreach($todo->tags as $tag)
                         <input type="text" name="tag[tagname]" placeholder="tag" value="{{ $tag->tagname }}"/>
@@ -32,15 +34,15 @@
                     @endforeach
                 </div>
                 
-                <div class="content_body">
+                <div class="content_body" style="text-align: center;">
                     <h2 style="text-align:center">Details</h2>
                     <input type="text" name="todo[body]" placeholder="memo" value="{{ $todo->body }}"/>
                     <p  style="text-align:center"class="body__error" style="color:red">{{ $errors->first('todo.body') }}</p>
                 </div>
                 
-                <div class="content_deadline">
+                <div class="content_deadline" style="text-align: center;">
                     <h2 style="text-align:center">Deadline</h2>
-                    <input class="flatpickr" type="text" name="todo[deadline]" placeholder="Select Date.." value="{{ $todo->deadline }}"/>
+                    <input style="text-align:center" class="flatpickr" type="text" name="todo[deadline]" placeholder="Select Date.." value="{{ $todo->deadline }}"/>
                     <p style="text-align:center" class="deadline__error" style="color:red">{{ $errors->first('todo.deadline') }}</p>
                     <script>
                         flatpickr('.flatpickr');

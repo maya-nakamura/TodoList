@@ -32,7 +32,6 @@
                 </p>
                 <!--<p style="text-align:center">body: {{$todo->body}}</p>-->
                 <p style="text-align:center">dead_line: {{$todo->deadline}}</p>
-                <br/> 
                 <form action="/todos/{{ $todo->id }}" id="from_delete" method="POST">
                     @csrf
                     @method('DELETE')
@@ -46,7 +45,8 @@
                             document.getElementById('from_delete').submit();
                         }   
                     }
-        </script>
+                </script>
+                <br/> 
         @endforeach
     </body>
 </html>
