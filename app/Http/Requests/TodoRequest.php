@@ -15,7 +15,7 @@ class TodoRequest extends FormRequest
             'todo.title' => 'required|string|max:30',
             'todo.body' => 'required|string|max:100',
             'tag.tagname' => 'required|string|max:20',
-            'todo.deadline' => 'required|string|max:10',
+            'todo.deadline' => 'required|date|after:yesterday',
         ];
     }
 }

@@ -8,11 +8,15 @@
         <title>TodoList</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
     </head>
     <body>
         <br/> 
+        <br/>
         <h1 style="text-align:center">Todo List</h1>
-        <br/> 
+        <br/>
         <h3 style="text-align:center"><a href='/todos/create'>create</a></h3>
         <br/> 
         
@@ -20,6 +24,13 @@
             <div class="form-group">
                 <input type="search"  style="position: absolute; left: 100px; top: 100px"/ class="form-control mr-sm-2" name="search" value="{{request('search')}}" placeholder="タグ検索" aria-label="検索...">
                 <input type="submit"  style="position: absolute; left: 325px; top: 100px"/ value="検索" class="btn btn-info">
+            </div>
+            <div class="form-group_date">
+                <input type="search"  style="position: absolute; left: 100px; top: 150px"/ class="flatpickr" name="search_date" value="{{request('search_date')}}" placeholder="日付検索", aria-label="検索...">
+                <script>
+                    flatpickr('.flatpickr');
+                </script>
+                <input type="submit"  style="position: absolute; left: 325px; top: 150px"/ value="検索" class="btn btn-info">
             </div>
         </form>
         

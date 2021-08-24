@@ -7,30 +7,46 @@ use App\Tag;
 use App\Todo;
 use App\Merge;
 use DB;
+use Slack;
 
 class TodoController extends Controller
 {
     public function index(){   //検索と一覧表示の機能を持たせる
-        $search = request('search');
+        echo "今日は", date('Y/m/d'), "です"; 
         
-        if (!empty($search)){
+        $search = request('search');
+        $search_date = request('search_date');
+        
+        ////検索
+        if (!empty($search) && empty($search_date)){
             $keyword = Tag::query()->where('tagname',  '=', $search)->get('id')->toArray();
             //dd($keyword);
             
             if(!empty($keyword)){
-                //$merges = Merge::all();
-                //dd($merges);
                 $filterd = Merge::query()->whereIn('tag_id', $keyword)->get('todo_id')->toArray();
                 $todos = Todo::query()->whereIn('id', $filterd)->get();
             }
             else{
-                echo "一致する結果はありませんでした";  //位置を注意
-                $todos = Todo::all();
+                echo "　　　　　　　　　　　　　　　　　　　　　　　　　　　ーーーーーー　一致するタグはありませんでした　ーーーーーー";  //位置を注意
+                $todos = Todo::orderBy('deadline', 'asc')->get();
+            }
+        }
+        elseif (!empty($search_date) && empty($search)){
+            $keyword_date = Todo::query()->where('deadline',  '=', $search_date)->get('id')->toArray();
+            
+            if(!empty($keyword_date)){
+                $filterd_date = Merge::query()->whereIn('todo_id', $keyword_date)->get('todo_id')->toArray();
+                $todos = Todo::query()->whereIn('id', $filterd_date)->get();
+            }
+            else{
+                echo "　　　　　　　　　　　　　　　　　　　　　　　　　　　ーーーーーー　一致する日程はありませんでした　ーーーーーー";  //位置を注意
+                $todos = Todo::orderBy('deadline', 'asc')->get();
             }
         }
         else{
-            $todos = Todo::all();
+            $todos = Todo::orderBy('deadline', 'asc')->get();   //期限順に並び替える
         }
+        //////
         return view('index')->with(['todos' => $todos]);
     }
     
@@ -53,7 +69,8 @@ class TodoController extends Controller
         $merge->todo_id = $todo->id;
         $merge->tag_id = $tag->id;
         $merge->save();
-    
+        
+        Slack::send("新しく予定が追加されました");
         return redirect('/todos/' . $todo->id);
     }
     public function edit(Todo $todo){   //編集ページ
@@ -76,6 +93,7 @@ class TodoController extends Controller
         $item->tag_id = $tag->id;
         $item->save();
         
+        Slack::send("予定が変更されました");
         return redirect('/todos/' .$todo->id);
     }
     public function destroy(Todo $todo){
