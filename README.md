@@ -1,3 +1,11 @@
+<h1>Todoアプリ</h1>
+<h3>使用して欲しい人</h3>
+<p>UIがシンプルでありながら、検索機能（タグ・日程）によって、必要な情報を素早くピックアップしたい方です。</p>
+<h3>工夫した点</h3>
+<p>Todoリストにタグをつけたかったので、TOXI法を使って実現させた点です。Todoテーブルとタグが入ったTagsテーブルをMergesテーブルで結びつけました。Mergesテーブルによって繋げるためにforeign関数を使いました。</p>
+</br>
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
