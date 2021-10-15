@@ -15,9 +15,9 @@
     <body>
         <br/> 
         <br/>
-        <h1 style="text-align:center">Todo List</h1>
+        <h1 style="text-align:center">Todoリスト</h1>
         <br/>
-        <h3 style="text-align:center"><a href='/todos/create'>create</a></h3>
+        <h3 style="text-align:center"><a href='/todos/create'>新規作成</a></h3>
         <br/> 
         
         <form class="form-inline my-2 my-lg-0 ml-2">
@@ -36,18 +36,18 @@
         
         @foreach ($todos as $todo)
                 <h3 style="text-align:center"><a href="/todos/{{$todo->id}}">{{$todo->title}}</a></h3>
-                <p style="text-align:center">tag:
+                <p style="text-align:center">タグ:
                     @foreach($todo->tags as $tag)
                         {{$tag->tagname}}
                     @endforeach
                 </p>
                 <!--<p style="text-align:center">body: {{$todo->body}}</p>-->
-                <p style="text-align:center">dead_line: {{$todo->deadline}}</p>
+                <p style="text-align:center">締め切り: {{$todo->deadline}}</p>
                 <form action="/todos/{{ $todo->id }}" id="from_delete" method="POST">
                     @csrf
                     @method('DELETE')
                     <input type="submit" style="display:none"/>
-                    <p style="text-align:center" class='delete'>[<span onclick="deleteTodo(this)">delete</span>]</p> 
+                    <p style="text-align:center" class='delete'>[<span onclick="deleteTodo(this)">削除</span>]</p> 
                 </form>
                 <script>
                     function deleteTodo(e){

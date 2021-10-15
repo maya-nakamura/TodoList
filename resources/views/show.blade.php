@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-        <title style="text-align:center">TodoList</title>
+        <title style="text-align:center">Todoリスト</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
@@ -11,13 +11,13 @@
     
     <body style="text-align:center">
         <h1>Todo</h1>
-        <p class='edit'>[<a href="/todos/{{ $todo->id }}/edit">edit</a>]</p>
+        <p class='edit'>[<a href="/todos/{{ $todo->id }}/edit">編集</a>]</p>
         
         <form action="/todos/{{ $todo->id }}" id="from_delete" method="POST">
             @csrf
             @method('DELETE')
             <input type="submit" style="display:none"/>
-            <p class='delete'>[<span onclick="deleteTodo(this)">delete</span>]</p> 
+            <p class='delete'>[<span onclick="deleteTodo(this)">削除</span>]</p> 
         </form>
         <br/>
         
@@ -32,7 +32,7 @@
             <p>{{ $todo->deadline }}</p>
         </div>
         
-        <div class='back'>[<a href='/'>back</a>]</div>
+        <div class='back'>[<a href='/'>戻る</a>]</div>
         
         <script>
         function deleteTodo(e){
